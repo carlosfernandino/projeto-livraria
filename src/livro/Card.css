@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.card img {
+  align-self: center;
+}
+
+.card button {
+  align-self: flex-end;
+}
