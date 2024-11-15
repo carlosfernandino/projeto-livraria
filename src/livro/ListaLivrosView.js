@@ -24,13 +24,6 @@ export function ListaLivrosView() {
         {livros.map((l) => (
           <Card
             title={l.title}
-            onDelete={async () => {
-              await deleteById(l.id);
-              alert("Livro removido com sucesso!");
-
-              const livros = await findAll();
-              setLivros(livros);
-            }}
           />
         ))}
       </div>
