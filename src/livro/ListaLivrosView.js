@@ -18,13 +18,9 @@ export function ListaLivrosView() {
       >
         LISTAR
       </button>
-
-      <button>ADICIONAR</button>
       <div className="cards">
         {livros.map((l) => (
-          <Card
-            title={l.title}
-          />
+          <Card title={l.title} authors={l.authors} />
         ))}
       </div>
     </main>
