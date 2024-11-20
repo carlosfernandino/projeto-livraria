@@ -1,22 +1,46 @@
-main {
-  padding: 16px;
-  font-family: Arial, sans-serif;
-}
-
-section {
-  margin-top: 24px;
-}
-
-.cards {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  width: 200px;
+  width: 250px; /* Ajuste a largura do card */
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  width: 100px; /* Tamanho da imagem */
+  height: 150px; /* Altura proporcional */
+  object-fit: cover; /* Ajusta imagem para caber no espaço */
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 8px 0;
+}
+
+.card-author {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f9f9f9;
+  cursor: pointer;
 }
