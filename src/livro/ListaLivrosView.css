@@ -31,25 +31,63 @@ button:hover {
 }
 
 /* Seções de estantes */
+/* Seção das estantes */
 section {
-  margin-top: 40px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
-h2 {
+/* Título da estante, com um efeito visual de expansão/contração */
+/* Estilo para o título da estante e o ícone */
+section h2 {
   font-size: 1.5rem;
-  color: #555;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-left: 50px;
-  text-align: left;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px; /* Espaço entre o ícone e o texto */
 }
 
-/* Estilo dos cards dentro das seções */
+section h2 i {
+  transition: transform 0.3s ease;
+}
+
+/* Ícone de seta quando estante expandida */
+section h2 i.fas.fa-chevron-up {
+  transform: rotate(180deg);
+}
+
+/* Estilos das estantes */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
+}
+
+.cards.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.cards.expanded {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* Card */
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 200px;
   padding: 10px;
-  justify-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
