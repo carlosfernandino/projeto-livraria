@@ -34,6 +34,7 @@ export function ListaLivrosView() {
         LISTAR
       </button>
 
+      {/* Estante: Estou lendo */}
       <section>
         <h2>Estou lendo</h2>
         <div className="cards">
@@ -41,12 +42,15 @@ export function ListaLivrosView() {
             <Card
               key={l.id}
               title={l.title}
+              author={l.authors}
+              image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
             />
           ))}
         </div>
       </section>
 
+      {/* Estante: Já li */}
       <section>
         <h2>Já li</h2>
         <div className="cards">
@@ -54,12 +58,15 @@ export function ListaLivrosView() {
             <Card
               key={l.id}
               title={l.title}
+              author={l.authors}
+              image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
             />
           ))}
         </div>
       </section>
 
+      {/* Estante: Quero ler */}
       <section>
         <h2>Quero ler</h2>
         <div className="cards">
@@ -67,12 +74,15 @@ export function ListaLivrosView() {
             <Card
               key={l.id}
               title={l.title}
+              author={l.authors}
+              image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
             />
           ))}
         </div>
       </section>
 
+      {/* Livros disponíveis */}
       <section>
         <h2>Livros disponíveis</h2>
         <div className="cards">
@@ -80,6 +90,8 @@ export function ListaLivrosView() {
             <Card
               key={l.id}
               title={l.title}
+              author={l.authors}
+              image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
             />
           ))}
