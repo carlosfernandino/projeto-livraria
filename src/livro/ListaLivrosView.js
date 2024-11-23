@@ -1,4 +1,4 @@
-import { findAll } from "./LivrosApi";
+import { findAll } from "./LivrosApi"; // Removido findByTitle
 import { Card } from "./Card";
 import { useState } from "react";
 import "./ListaLivrosView.css";
@@ -13,6 +13,7 @@ export function ListaLivrosView() {
     jaLi: false,
     queroLer: false,
   });
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de busca
 
   const moverLivro = (livro, paraEstante) => {
     setEstouLendo((prev) => prev.filter((l) => l.id !== livro.id));
@@ -31,19 +32,49 @@ export function ListaLivrosView() {
     }));
   };
 
+  const handleSearch = async () => {
+    if (searchTerm.trim() === "") {
+      alert("Por favor, digite um título para buscar!");
+      return;
+    }
+
+    try {
+      const allBooks = await findAll(); // Busca todos os livros
+      const filteredBooks = allBooks.filter(
+        (book) => book.title.toLowerCase().includes(searchTerm.toLowerCase()) // Filtro no frontend
+      );
+      setLivros(filteredBooks);
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao buscar livros. Tente novamente.");
+    }
+  };
+
   return (
     <main>
       <h1>Minha Biblioteca</h1>
+
+      {/* Barra de Pesquisa */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Digite o título do livro"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Pesquisar</button>
+      </div>
+
       <button
         onClick={async () => {
           const livros = await findAll();
           setLivros(livros);
         }}
       >
-        LISTAR
+        LISTAR TODOS OS LIVROS
       </button>
 
-      {/* Estante: Estou lendo */}
+      {/* Estantes */}
       <section>
         <h2 onClick={() => toggleEstante("estouLendo")}>
           <i
@@ -68,7 +99,6 @@ export function ListaLivrosView() {
         </div>
       </section>
 
-      {/* Estante: Já li */}
       <section>
         <h2 onClick={() => toggleEstante("jaLi")}>
           <i
@@ -91,7 +121,6 @@ export function ListaLivrosView() {
         </div>
       </section>
 
-      {/* Estante: Quero ler */}
       <section>
         <h2 onClick={() => toggleEstante("queroLer")}>
           <i
@@ -116,7 +145,7 @@ export function ListaLivrosView() {
         </div>
       </section>
 
-      {/* Livros disponíveis */}
+      {/* Livros Disponíveis */}
       <section>
         <h2>Livros disponíveis</h2>
         <div className="cards">
