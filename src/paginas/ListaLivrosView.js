@@ -1,6 +1,7 @@
-import { findAll } from "./LivrosApi"; // Removido findByTitle
-import { Card } from "./Card";
 import { useState } from "react";
+import { Card } from "../livro/Card";
+import { findAll } from "../livro/LivrosApi";
+import { Header } from "./Header";
 import "./ListaLivrosView.css";
 
 export function ListaLivrosView() {
@@ -13,7 +14,6 @@ export function ListaLivrosView() {
     jaLi: false,
     queroLer: false,
   });
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de busca
 
   const moverLivro = (livro, paraEstante) => {
     setEstouLendo((prev) => prev.filter((l) => l.id !== livro.id));
@@ -32,46 +32,16 @@ export function ListaLivrosView() {
     }));
   };
 
-  const handleSearch = async () => {
-    if (searchTerm.trim() === "") {
-      alert("Por favor, digite um título para buscar!");
-      return;
-    }
-
-    try {
-      const allBooks = await findAll(); // Busca todos os livros
-      const filteredBooks = allBooks.filter(
-        (book) => book.title.toLowerCase().includes(searchTerm.toLowerCase()) // Filtro no frontend
-      );
-      setLivros(filteredBooks);
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao buscar livros. Tente novamente.");
-    }
-  };
-
   return (
     <main>
-      <h1>Minha Biblioteca</h1>
-      <a href="/busca">Busca</a>
-      {/* Barra de Pesquisa */}
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Digite o título do livro"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={handleSearch}>Pesquisar</button>
-      </div>
-
+      <Header />
       <button
         onClick={async () => {
           const livros = await findAll();
           setLivros(livros);
         }}
       >
-        LISTAR TODOS OS LIVROS
+        LISTAR
       </button>
 
       {/* Estantes */}
