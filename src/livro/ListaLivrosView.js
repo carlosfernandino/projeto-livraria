@@ -53,7 +53,7 @@ export function ListaLivrosView() {
   return (
     <main>
       <h1>Minha Biblioteca</h1>
-
+      <a href="/busca">Busca</a>
       {/* Barra de Pesquisa */}
       <div className="search-bar">
         <input
