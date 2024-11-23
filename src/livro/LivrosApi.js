@@ -17,23 +17,3 @@ export async function findAll() {
     throw new Error("Falha ao consultar os livros");
   }
 }
-
-export async function findByTitle(title) {
-  const requestInit = {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer 12120117",
-    },
-  };
-
-  const responseHttp = await fetch(
-    `${URL}?title=${encodeURIComponent(title)}`,
-    requestInit
-  );
-
-  if (responseHttp.ok) {
-    return await responseHttp.json();
-  } else {
-    throw new Error("Falha ao buscar livros pelo título");
-  }
-}
