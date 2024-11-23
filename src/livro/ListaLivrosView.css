@@ -1,59 +1,72 @@
+/* Estilos gerais */
 main {
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   padding: 20px;
-  background-color: #f4f4f9;
+  background-color: #f9f9fc;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 /* Cabeçalho principal */
 h1 {
   text-align: center;
-  font-size: 2rem;
-  color: #333;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
 }
 
 /* Botão de listar */
 button {
   display: block;
-  width: 200px;
+  width: 250px;
   margin: 20px auto;
-  padding: 10px 0;
-  background-color: #4caf50;
+  padding: 12px 0;
+  background-color: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Seções de estantes */
-/* Seção das estantes */
 section {
-  margin-bottom: 20px;
-  cursor: pointer;
+  margin-bottom: 30px;
 }
 
-/* Título da estante, com um efeito visual de expansão/contração */
-/* Estilo para o título da estante e o ícone */
+/* Título das estantes */
 section h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #333;
+  color: #34495e;
   display: flex;
   align-items: center;
   cursor: pointer;
-  gap: 8px; /* Espaço entre o ícone e o texto */
+  gap: 8px;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
 }
 
+section h2:hover {
+  color: #1abc9c;
+}
+
+/* Ícones das setas */
 section h2 i {
   transition: transform 0.3s ease;
 }
 
-/* Ícone de seta quando estante expandida */
 section h2 i.fas.fa-chevron-up {
   transform: rotate(180deg);
 }
@@ -79,19 +92,60 @@ section h2 i.fas.fa-chevron-up {
 
 /* Card */
 .card {
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  width: 200px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  width: 220px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
+.card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 5px 0;
+}
+
+.card button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #16a085;
+}
+
+/* Barra de Pesquisa */
 .search-bar {
   display: flex;
   justify-content: center;
@@ -100,21 +154,40 @@ section h2 i.fas.fa-chevron-up {
 
 .search-bar input {
   width: 300px;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
+  font-size: 1rem;
 }
 
 .search-bar button {
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: 12px 20px;
+  background-color: #3498db;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .search-bar button:hover {
-  background-color: #0056b3;
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cards {
+    justify-content: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .search-bar input {
+    width: 200px;
+  }
 }
