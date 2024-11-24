@@ -2,28 +2,17 @@ import { useState } from "react";
 import { Card } from "../livro/Card";
 import { findAll } from "../livro/LivrosApi";
 import { Header } from "./Header";
+import { useEstante } from "../livro/EstanteContext";
 import "./ListaLivrosView.css";
 
 export function ListaLivrosView() {
-  const [estouLendo, setEstouLendo] = useState([]);
-  const [jaLi, setJaLi] = useState([]);
-  const [queroLer, setQueroLer] = useState([]);
+  const { estouLendo, jaLi, queroLer, moverLivro } = useEstante();
   const [livros, setLivros] = useState([]);
   const [expanded, setExpanded] = useState({
     estouLendo: false,
     jaLi: false,
     queroLer: false,
   });
-
-  const moverLivro = (livro, paraEstante) => {
-    setEstouLendo((prev) => prev.filter((l) => l.id !== livro.id));
-    setJaLi((prev) => prev.filter((l) => l.id !== livro.id));
-    setQueroLer((prev) => prev.filter((l) => l.id !== livro.id));
-
-    if (paraEstante === "estouLendo") setEstouLendo((prev) => [...prev, livro]);
-    if (paraEstante === "jaLi") setJaLi((prev) => [...prev, livro]);
-    if (paraEstante === "queroLer") setQueroLer((prev) => [...prev, livro]);
-  };
 
   const toggleEstante = (estante) => {
     setExpanded((prev) => ({
@@ -33,9 +22,12 @@ export function ListaLivrosView() {
   };
 
   const listarLivros = async () => {
-    const livros = await findAll();
-    setLivros(livros);
-    localStorage.setItem("livros", JSON.stringify(livros)); // Salva os livros no localStorage
+    try {
+      const livros = await findAll();
+      setLivros(livros);
+    } catch (error) {
+      console.error("Erro ao listar os livros:", error);
+    }
   };
 
   return (
