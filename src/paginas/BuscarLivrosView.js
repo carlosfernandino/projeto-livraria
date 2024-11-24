@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { findAll } from "../livro/LivrosApi";
 import { Header } from "./Header";
+import { Card } from "../livro/Card";
 import "./BuscarLivrosView.css";
 
 export function BuscarLivrosView() {
-  const [searchTerm, setSearchTerm] = useState(""); // Termo de busca
-  const [results, setResults] = useState([]); // Armazena os resultados
-  const [error, setError] = useState(null); // Armazena erros
-  const [loading, setLoading] = useState(false); // Controla o estado de carregamento
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) {
@@ -20,9 +21,9 @@ export function BuscarLivrosView() {
     setLoading(true);
 
     try {
-      const livros = await findAll(); // Chama a função para pegar todos os livros
-      const livrosFiltrados = livros.filter(
-        (livro) => livro.title.toLowerCase().includes(searchTerm.toLowerCase()) // Filtra pelo título
+      const livros = await findAll();
+      const livrosFiltrados = livros.filter((livro) =>
+        livro.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setResults(livrosFiltrados);
     } catch (err) {
@@ -35,7 +36,7 @@ export function BuscarLivrosView() {
 
   return (
     <main>
-      <Header /> {/* Cabeçalho com navegação */}
+      <Header />
       <div className="buscar-livros-container">
         <h1>Buscar Livros</h1>
         <div className="search-bar">
@@ -43,29 +44,26 @@ export function BuscarLivrosView() {
             type="text"
             placeholder="Digite o título do livro"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} // Atualiza o termo de busca
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button onClick={handleSearch} disabled={loading}>
             {loading ? "Buscando..." : "Buscar"}
           </button>
         </div>
-        {error && <p className="error-message">{error}</p>} {/* Exibe erros */}
+        {error && <p className="error-message">{error}</p>}
         <div className="search-results">
-          {results.length === 0 && !loading && <p>Nenhum livro encontrado.</p>}{" "}
-          {/* Mensagem quando não encontra resultados */}
+          {results.length === 0 && !loading && <p>Nenhum livro encontrado.</p>}
           {results.map((livro) => (
-            <div key={livro.id} className="livro-card">
-              <img
-                src={
-                  livro.imageLinks?.thumbnail ||
-                  livro.imageLinks?.smallThumbnail ||
-                  "https://via.placeholder.com/128x193.png?text=No+Image"
-                }
-                alt={livro.title}
-              />
-              <h3>{livro.title}</h3>
-              <p>Autor(es): {livro.authors?.join(", ") || "Desconhecido"}</p>
-            </div>
+            <Card
+              key={livro.id}
+              id={livro.id} // Passando o ID para o Card
+              title={livro.title}
+              author={livro.authors?.join(", ") || "Desconhecido"}
+              image={
+                livro.imageLinks?.thumbnail || livro.imageLinks?.smallThumbnail
+              }
+              onMove={(estante) => moverLivro(livro, estante)}
+            />
           ))}
         </div>
       </div>
