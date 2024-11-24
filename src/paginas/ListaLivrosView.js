@@ -32,17 +32,16 @@ export function ListaLivrosView() {
     }));
   };
 
+  const listarLivros = async () => {
+    const livros = await findAll();
+    setLivros(livros);
+    localStorage.setItem("livros", JSON.stringify(livros)); // Salva os livros no localStorage
+  };
+
   return (
     <main>
       <Header />
-      <button
-        onClick={async () => {
-          const livros = await findAll();
-          setLivros(livros);
-        }}
-      >
-        LISTAR
-      </button>
+      <button onClick={listarLivros}>LISTAR</button>
 
       {/* Estantes */}
       <section>
@@ -60,6 +59,7 @@ export function ListaLivrosView() {
           {estouLendo.map((l) => (
             <Card
               key={l.id}
+              id={l.id}
               title={l.title}
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
@@ -82,6 +82,7 @@ export function ListaLivrosView() {
           {jaLi.map((l) => (
             <Card
               key={l.id}
+              id={l.id}
               title={l.title}
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
@@ -106,6 +107,7 @@ export function ListaLivrosView() {
           {queroLer.map((l) => (
             <Card
               key={l.id}
+              id={l.id}
               title={l.title}
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
@@ -122,6 +124,7 @@ export function ListaLivrosView() {
           {livros.map((l) => (
             <Card
               key={l.id}
+              id={l.id}
               title={l.title}
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
