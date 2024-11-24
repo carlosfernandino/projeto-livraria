@@ -2,6 +2,7 @@ import { useState } from "react";
 import { findAll } from "../livro/LivrosApi";
 import { Header } from "./Header";
 import { Card } from "../livro/Card";
+import { useEstante } from "../livro/EstanteContext";
 import "./BuscarLivrosView.css";
 
 export function BuscarLivrosView() {
@@ -9,6 +10,7 @@ export function BuscarLivrosView() {
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { moverLivro } = useEstante();
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) {
@@ -56,7 +58,7 @@ export function BuscarLivrosView() {
           {results.map((livro) => (
             <Card
               key={livro.id}
-              id={livro.id} // Passando o ID para o Card
+              id={livro.id}
               title={livro.title}
               author={livro.authors?.join(", ") || "Desconhecido"}
               image={
