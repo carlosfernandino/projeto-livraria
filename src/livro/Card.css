@@ -37,6 +37,13 @@
   margin-bottom: 15px;
 }
 
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adiciona espaço entre os itens */
+  width: 100%;
+}
+
 select {
   padding: 8px;
   border-radius: 5px;
@@ -50,4 +57,24 @@ select {
 
 select:hover {
   border-color: #4caf50;
+}
+
+.remove-button {
+  padding: 8px;
+  font-size: 0.9rem;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Garante que o botão ocupe toda a largura disponível */
+}
+
+.remove-button:hover {
+  background-color: #ff1a1a;
+}
+
+.remove-button:active {
+  background-color: #e60000;
 }

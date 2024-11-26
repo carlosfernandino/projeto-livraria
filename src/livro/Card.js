@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Card.css";
 
-export function Card({ id, title, author, image, onMove }) {
+export function Card({ id, title, author, image, onMove, onRemove }) {
   return (
     <div className="card">
       <Link to={`/livro/${id}`}>
@@ -15,14 +15,19 @@ export function Card({ id, title, author, image, onMove }) {
           {author && <p className="card-author">por {author}</p>}
         </div>
       </Link>
-      <select onChange={(e) => onMove(e.target.value)} defaultValue="">
-        <option value="" disabled>
-          Mover para...
-        </option>
-        <option value="estouLendo">Estou lendo</option>
-        <option value="jaLi">Já li</option>
-        <option value="queroLer">Quero ler</option>
-      </select>
+      <div className="card-actions">
+        <select onChange={(e) => onMove(e.target.value)} defaultValue="">
+          <option value="" disabled>
+            Mover para...
+          </option>
+          <option value="estouLendo">Estou lendo</option>
+          <option value="jaLi">Já li</option>
+          <option value="queroLer">Quero ler</option>
+        </select>
+        <button onClick={onRemove} className="remove-button">
+          Remover
+        </button>
+      </div>
     </div>
   );
 }
