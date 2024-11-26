@@ -4,9 +4,10 @@ import { findAll } from "../livro/LivrosApi";
 import { Header } from "./Header";
 import { useEstante } from "../livro/EstanteContext";
 import "./ListaLivrosView.css";
+import { toast } from "react-toastify"; // Exemplo para notificações
 
 export function ListaLivrosView() {
-  const { estouLendo, jaLi, queroLer, moverLivro } = useEstante();
+  const { estouLendo, jaLi, queroLer, moverLivro, removerLivro } = useEstante();
   const [livros, setLivros] = useState([]);
   const [expanded, setExpanded] = useState({
     estouLendo: false,
@@ -27,6 +28,15 @@ export function ListaLivrosView() {
       setLivros(livros);
     } catch (error) {
       console.error("Erro ao listar os livros:", error);
+    }
+  };
+
+  const handleRemove = (livro) => {
+    const result = removerLivro(livro);
+    if (result.success) {
+      toast.success(`Livro removido da estante "${result.estante}".`);
+    } else {
+      toast.error("O livro não está em nenhuma estante.");
     }
   };
 
@@ -56,6 +66,7 @@ export function ListaLivrosView() {
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
+              onRemove={() => handleRemove(l)}
             />
           ))}
         </div>
@@ -79,6 +90,7 @@ export function ListaLivrosView() {
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
+              onRemove={() => handleRemove(l)}
             />
           ))}
         </div>
@@ -104,6 +116,7 @@ export function ListaLivrosView() {
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
+              onRemove={() => handleRemove(l)}
             />
           ))}
         </div>
@@ -121,6 +134,7 @@ export function ListaLivrosView() {
               author={l.authors?.join(", ") || "Autor desconhecido"}
               image={l.imageLinks?.thumbnail || l.imageLinks?.smallThumbnail}
               onMove={(estante) => moverLivro(l, estante)}
+              onRemove={() => handleRemove(l)}
             />
           ))}
         </div>
